@@ -37,6 +37,7 @@
                     <FileItemComponent :filedata="file" />
                 </li>
             </ul>
+            <p v-if="files.length === 0">No files found.</p>
             <p v-else>Loading files...</p>
         </div>
     </div>

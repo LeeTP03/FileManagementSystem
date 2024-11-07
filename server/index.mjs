@@ -5,10 +5,11 @@ import posts from "./routes/posts.mjs";
 import "./loadEnvironment.mjs";
 import fs from "fs";
 import path from "path";
-const app = express()
-const port = 3000
 import multer from "multer";
 import db from "./db/conn.mjs";
+
+const app = express()
+const port = 3000
 
 app.use(cors());
 app.use(express.json());

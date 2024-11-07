@@ -17,8 +17,7 @@ app.use(express.json());
 app.use("/posts", posts);
 
 const curr_path = import.meta.url.replace("file:///", "").split("/").slice(0, -1).join("/");
-console.log(curr_path);
-const filepath = path.join("C:/\Users/\lyfes/\Documents/\Coding/\MD Intern/\server", "uploads");
+const filepath = path.join(curr_path, "uploads");
 
 app.use((err, _req, res, next) => {
   res.status(500).send("Uh oh! An unexpected error occured.")
@@ -42,6 +41,10 @@ app.get('/files', async (req, res) => {
   });
 
 app.post('/upload', upload.single('file'), (req, res) => {
+  //create an uploads folder in the root directory
+  if (!fs.existsSync('uploads')) {
+    fs.mkdirSync('uploads');
+  }
   res.send('File uploaded successfully');
 
   const filedata = {
@@ -54,6 +57,10 @@ app.post('/upload', upload.single('file'), (req, res) => {
 });
 
 app.post('/create', (req, res) => {
+  //create an uploads folder in the root directory
+  if (!fs.existsSync('uploads')) {
+    fs.mkdirSync('uploads');
+  }
   const { filename, content } = req.body;
   
   if (!filename || !content) {
